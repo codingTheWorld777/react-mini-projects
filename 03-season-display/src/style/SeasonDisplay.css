@@ -1,0 +1,19 @@
+.icon-left {
+    position: absolute;
+    top: -54px;
+    left: -50px;
+}
+
+.icon-right {
+    position: absolute;
+    top: 290px;
+    right: -134px;
+}
+
+.ui.message.winter {
+    background: aliceblue;
+}
+
+.ui.message.summer {
+    background: #f9e1b6;
+}
