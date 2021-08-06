@@ -21,4 +21,7 @@ and **priority of eventListener** in event bubbling
 * Navigation in React / Routing
     * Learn **"popstate"** event of **window** and to add a history entry to the history stack by **window.history.pushstate(...)**.
 
+## REMARK
+* In src/apis/translate.js, you should produce an API key in order to run this app.
+
 
