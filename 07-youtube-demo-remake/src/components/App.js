@@ -27,14 +27,6 @@ const App = () => {
     setSelectedVideo(response.data.items[0]);
   };
 
-  /** To handle the 'click' event onto VideoItem (or VideoList) component and send video
-   * data to VideoDetail via App component
-   */
-  const onVideoSelect = (video) => {
-    setSelectedVideo(video);
-    // console.log("From the App component", selectedVideo);
-  };
-
   return (
     <div>
       <SearchBar onTermSubmit={onTermSubmit} />
@@ -48,7 +40,7 @@ const App = () => {
           <div className="five wide column">
             <VideoList
               videos={videos}
-              onVideoSelect={onVideoSelect}
+              onVideoSelect={setSelectedVideo}
             />
           </div>
         </div>
