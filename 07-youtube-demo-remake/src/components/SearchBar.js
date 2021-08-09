@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
-const SearchBar = ({ onTermSubmit }) => {
+const SearchBar = ({ onFormSubmit }) => {
   const [term, setTerm] = useState("");
 
-  const onFormSubmit = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    onTermSubmit(term);
+    onFormSubmit(term);
   };
 
   const onInputChange = (e) => {
@@ -14,7 +14,7 @@ const SearchBar = ({ onTermSubmit }) => {
 
   return (
     <div className="search-bar ui segment">
-      <form className="ui form" onSubmit={onFormSubmit}>
+      <form className="ui form" onSubmit={onSubmit}>
         <div className="field">
           <label htmlFor="search-input">Youtube video search</label>
           <input
