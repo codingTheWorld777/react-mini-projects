@@ -1,7 +1,7 @@
 # Getting Started with Create React App
 
 ## LINK 
-[https://06-widgets-codingtheworld777.vercel.app/]([https://06-widgets-codingtheworld777.vercel.app/])
+[https://06-widgets-codingtheworld777.vercel.app/](https://06-widgets-codingtheworld777.vercel.app)
 
 ## CONTENT
 * App structure:
