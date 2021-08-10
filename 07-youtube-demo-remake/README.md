@@ -1,6 +1,11 @@
 # Getting Started with Create React App
 
-## Summary: Rewrite a Youtube demo application by using Functional Components instead of using Class Components
+## Summary
+* Rewrite a Youtube demo application by using Functional Components instead of using Class Components
+
+## Link
+* [https://07-youtube-demo-remake-kfilv9ckz-codingtheworld777.vercel.app/](https://07-youtube-demo-remake-kfilv9ckz-codingtheworld777.vercel.app/)
+(The number of requests Youtube Datas API per day is limited, so if you exceed this number of requests, datas might not be fetched to client-side).
 
 /** 
   * **Remark**: All datas in this exemple is fetched to the highest hierachy of component , in this case: **App**, and other components exchange data with each other through **App**.
