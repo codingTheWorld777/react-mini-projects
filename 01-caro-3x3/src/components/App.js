@@ -4,51 +4,55 @@ import Panel from "./Panel";
 const App = () => {
     const [coords, setCoords] = useState([]);
     const [turn, setTurn] = useState(0);
+    const [gameBoard, setGameBoard] = useState([[null, null, null], [null, null, null], [null, null, null]]);
     const [winner, setWinner] = useState(null);
 
-    const gameBoard = [[null, null, null], [null, null, null], [null, null, null]];
-    
     const updateGameBoard = (x, y) => {
-        setCoords(coords.concat({ x: x, y: y}));
+        if (!gameBoard[y][x] && !winner) {
+            setCoords(coords.concat({ x: x, y: y}));
+            setTurn(turn + 1);
 
-        if ((turn + 1) % 2 === 1) gameBoard[y][x] = "X";
-        else gameBoard[y][x] = "O";
+            let cloneGameBoard = [[null, null, null], [null, null, null], [null, null, null]];
 
-        setTurn(turn + 1);
+            for (let j = 0; j < gameBoard.length; j++) {
+                for (let i = 0; i < gameBoard[0].length; i++) {
+                    cloneGameBoard[j][i] = gameBoard[j][i];
+                }
+            }
+            if ((turn + 1) % 2 === 1) cloneGameBoard[y][x] = "X";
+            else cloneGameBoard[y][x] = "O";
+
+            setGameBoard(cloneGameBoard);
+        }
     };
 
     // Check if we have a winner!
     useEffect(() => {
         /** Find the winner horizontally */ 
+        console.log("yeah", gameBoard);
         for (let y = 0; y < gameBoard.length; y++) { 
-            let count = 0;
+            if (gameBoard[y][0] && gameBoard[y][0] === gameBoard[y][1] && gameBoard[y][0] === gameBoard[y][2]) {
+                setWinner(<span>The winner is: player {(turn % 2 === 1) ? 1 : 2}</span>);  
+                return;
 
-            for (let x = 0; x < gameBoard[0].length; x++) {  
-                if (gameBoard[y][x] === gameBoard[y][x + 1] === gameBoard[y][x + 2]) {
-                    setWinner(<span>The winner is: player {(turn % 2) + 1}</span>);   // the winner is player 1 or 2
-                    console.log("Winner", (turn % 2) + 1);
-                    return;
-                } else break;   // break out of the loop of x and increase y to 1 
-            }
+            } else continue;   
         }
 
         /** Find the winner vertically */ 
         for (let x = 0; x < gameBoard[0].length; x++) {
-            for (let y = 0; y < gameBoard.length; y++) {
-                if (gameBoard[x][y] === gameBoard[x][y + 1] === gameBoard[x][y + 2]) {
-                    setWinner(<span>The winner is: player {(turn % 2) + 1}</span>);   // the winner is player 1 or 2
-                    console.log("Winner", (turn % 2) + 1);
-                    return;
-                } else break;   // break out of the loop of y and increase x to 1 
-            }
+            if (gameBoard[x][0] && gameBoard[x][0] === gameBoard[x][1] && gameBoard[x][0] === gameBoard[x][2]) {
+                setWinner(<span>The winner is: player {(turn % 2 === 1) ? 1 : 2}</span>); 
+                return;
+
+            } else continue;   
         }
 
     }, [gameBoard]);
 
     return (
         <div className="ui container" style={{ marginTop: "40px" }}>
-            <h2 id="winner" className="ui header" style={{ marginBottom: "10px" }}>{winner}</h2>
             <Panel onUpdateGameBoard={updateGameBoard} coords={coords} />
+            <h2 id="winner" className="ui header" style={{ marginTop: "20px" }}>{winner}</h2>
         </div>
     );
 };

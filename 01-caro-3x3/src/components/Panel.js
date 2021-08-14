@@ -16,7 +16,7 @@ const Panel = ({ onUpdateGameBoard }) => {
     };
 
     const renderedCaroElementList = createSetOfCoords().map((coords, index) => {
-        return <CaroElement key={index} tickCaro={onUpdateGameBoard} coords={coords} />;
+        return <CaroElement key={index} coords={coords} onTickCaro={onUpdateGameBoard} />;
     });
 
     return (
