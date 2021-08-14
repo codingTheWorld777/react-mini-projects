@@ -40,14 +40,14 @@ const App = () => {
 
         /** Find the winner vertically */ 
         for (let x = 0; x < gameBoard[0].length; x++) {
-            if (gameBoard[x][0] && gameBoard[x][0] === gameBoard[x][1] && gameBoard[x][0] === gameBoard[x][2]) {
+            if (gameBoard[0][x] && gameBoard[0][x] === gameBoard[1][x] && gameBoard[0][x] === gameBoard[2][x]) {
                 setWinner(<span>The winner is: player {(turn % 2 === 1) ? 1 : 2}</span>); 
                 return;
 
             } else continue;   
         }
 
-    }, [gameBoard]);
+    }, [gameBoard, turn]);
 
     return (
         <div className="ui container" style={{ marginTop: "40px" }}>
