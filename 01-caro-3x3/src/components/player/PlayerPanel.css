@@ -1,0 +1,22 @@
+.player-panel {
+    width: 500px;
+    height: 432px;
+    border: 4px dotted orange;
+}
+
+.player-panel .group-player, .group-btn {
+    display: flex;
+    justify-content: center;
+}
+
+.group-btn .button {
+    margin: 0px 14px;
+}
+
+.player-panel .group-player .player {
+    text-align: center;
+    border: 2px solid black;
+    width: 200px;
+    height: 340px; 
+    margin: 20px 10px;
+}

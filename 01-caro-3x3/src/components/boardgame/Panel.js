@@ -2,7 +2,7 @@ import React from "react";
 import CaroElement from "./CaroElement";
 import "./Panel.css";
 
-const Panel = ({ onUpdateGameBoard }) => {
+const Panel = ({ onUpdateBoardGame }) => { 
     const createSetOfCoords = () => {
         let setOfCoords = [];
 
@@ -16,11 +16,16 @@ const Panel = ({ onUpdateGameBoard }) => {
     };
 
     const renderedCaroElementList = createSetOfCoords().map((coords, index) => {
-        return <CaroElement key={index} coords={coords} onTickCaro={onUpdateGameBoard} />;
+        return <CaroElement 
+            key={index} 
+            id={index} 
+            coords={coords} 
+            onTickCaro={onUpdateBoardGame} 
+        />;
     });
 
     return (
-        <div className="caro-board" style={{ width: "432px", height: "432px", border: "2px dotted orange" }}>
+        <div className="caro-board" style={{ width: "432px", height: "432px", border: "4px dotted orange" }}>
             <div className="caro-row">{renderedCaroElementList.slice(0, 3)}</div>
             <div className="caro-row">{renderedCaroElementList.slice(3, 6)}</div>
             <div className="caro-row">{renderedCaroElementList.slice(6, 9)}</div>
