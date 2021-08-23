@@ -1,10 +1,18 @@
 import React from "react";
+import SongList from "./SongList";
+import SongDetail from "./SongDetail";
 
 const App = () => {
   return (
-    <div className="ui container" style={{ margin: "40px 0px" }}>
-      Hello
-      <span></span>
+    <div className="ui container grid" style={{ margin: "40px 0px" }}>
+      <div className="ui row">
+        <div className="column eight wide">
+          <SongList />
+        </div>
+        <div className="column eight wide">
+          <SongDetail />
+        </div>
+      </div>
     </div>
   );
 };
