@@ -1,7 +1,7 @@
-import { movies$ } from "../db/movies";
+// import { movies$ } from "../db/movies";
 import { categories$ } from "../db/categories";
 
-export const fetchMovies = () => async (dispatch) => {
+export const fetchMovies = (movies$) => async (dispatch) => {
   const movies = await movies$;
   dispatch({ type: "FETCH_MOVIES", payload: movies });
 };

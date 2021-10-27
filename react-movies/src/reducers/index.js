@@ -6,8 +6,15 @@ const moviesReducer = (movies = [], action) => {
       return action.payload;
     case "DELETE_MOVIE":
       return movies.filter((movie) => movie.id !== action.payload.id);
+    default:
+      return movies;
+  }
+};
+
+const moviesFilteredReducer = (movies = [], action) => {
+  switch (action.type) {
     case "FILTER_MOVIES":
-      return movies.filter(
+      return action.payload.listOfMovies.filter(
         (movie) => movie.category === action.payload.category
       );
     default:
@@ -36,5 +43,6 @@ const cardsPerPageReducer = (numberOfCard = 12, action) => {
 export default combineReducers({
   movies: moviesReducer,
   categories: categoriesReducer,
+  moviesFiltered: moviesFilteredReducer,
   cardsPerPage: cardsPerPageReducer,
 });

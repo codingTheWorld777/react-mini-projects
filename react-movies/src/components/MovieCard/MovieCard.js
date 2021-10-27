@@ -3,12 +3,13 @@ import { connect } from "react-redux";
 import { fetchMovies } from "../../actions";
 import DeleteBtn from "./DeleteBtn";
 
-const MovieCard = ({ movies, fetchMovies }) => {
-  useEffect(() => {
-    fetchMovies();
-  }, []);
+const MovieCard = ({ movies, moviesFiltered, setCategory }) => {
+  // useEffect(() => {
+  //   renderMovies(movies);
+  //   renderMovies(moviesFiltered);
+  // }, [movies, moviesFiltered]);
 
-  const renderMovies = () => {
+  const renderMovies = (movies) => {
     const renderedMovies = movies.map((movie, id) => {
       return (
         <div className="col-12 col-sm-6 col-lg-3 mb-4" key={id}>
@@ -30,7 +31,7 @@ const MovieCard = ({ movies, fetchMovies }) => {
               </a>
             </div>
 
-            <DeleteBtn movie={movie} />
+            <DeleteBtn movie={movie} category={movie.category} setCategory={setCategory} />
           </div>
         </div>
       );
@@ -39,13 +40,20 @@ const MovieCard = ({ movies, fetchMovies }) => {
     return renderedMovies;
   };
 
-  return <div className="row">{movies ? renderMovies() : null}</div>;
+  return (
+    <div className="row">
+      {moviesFiltered.length
+        ? renderMovies(moviesFiltered)
+        : renderMovies(movies)}
+    </div>
+  );
 };
 
 const mapStateToProps = (state) => {
   return {
+    moviesFiltered: state.moviesFiltered,
     cardsPerPage: state.cardsPerPage,
   };
 };
 
-export default connect(mapStateToProps,  { fetchMovies })(MovieCard);
+export default connect(mapStateToProps, { fetchMovies })(MovieCard);

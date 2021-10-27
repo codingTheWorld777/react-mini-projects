@@ -43,7 +43,7 @@ const movies = [
   },
   {
     id: "7",
-    title: "Pulp Fiction",
+    title: "Pulp Fiction 2",
     category: "Thriller",
     likes: 12333,
     dislikes: 32,

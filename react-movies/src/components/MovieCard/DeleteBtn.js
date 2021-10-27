@@ -1,10 +1,24 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { deleteMovies, fetchCategories } from "../../actions";
+import { deleteMovies, fetchCategories, filterMovies } from "../../actions";
 
-const DeleteBtn = ({ movie, movies, deleteMovies, fetchCategories }) => {
+const DeleteBtn = ({
+  movie,
+  movies,
+  category,
+  setCategory,
+  moviesFiltered,
+  filterMovies,
+  deleteMovies,
+  fetchCategories,
+}) => {
   useEffect(() => {
     fetchCategories(movies);
+    moviesFiltered.length
+      ? (async () => {
+          await filterMovies(category, movies);
+        })()
+      : console.log("Nothing here");
   }, [movies]);
 
   return (
@@ -12,17 +26,19 @@ const DeleteBtn = ({ movie, movies, deleteMovies, fetchCategories }) => {
       <button
         type="button"
         className="btn btn-danger"
+        value={category}
         style={{ marginBottom: "10px", marginRight: "10px" }}
         onClick={() => {
           const actions = async () => {
+            await setCategory(category);
             await deleteMovies(movie);
-            await fetchCategories(movies);
+            // await fetchCategories(movies);
           };
 
           actions();
         }}
       >
-        Delete
+        Supprimer
       </button>
     </div>
   );
@@ -32,9 +48,12 @@ const mapStateToProps = (state) => {
   return {
     movies: state.movies,
     categories: state.categories,
+    moviesFiltered: state.moviesFiltered,
   };
 };
 
-export default connect(mapStateToProps, { deleteMovies, fetchCategories })(
-  DeleteBtn
-);
+export default connect(mapStateToProps, {
+  deleteMovies,
+  fetchCategories,
+  filterMovies,
+})(DeleteBtn);
