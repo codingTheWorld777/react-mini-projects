@@ -1,0 +1,6 @@
+# Distribution / packaging
+dist/
+
+# Custom
+node_modules/
+
