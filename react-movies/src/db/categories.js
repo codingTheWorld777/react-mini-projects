@@ -1,5 +1,5 @@
 export const categories$ = (movies$) => {
-  let categories = [];
+  let categories = ['All'];
 
   for (let movie of movies$) {
     if (!categories.includes(movie.category)) {

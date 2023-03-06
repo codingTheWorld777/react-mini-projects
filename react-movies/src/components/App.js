@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+
 import MovieCard from "./MovieCard/MovieCard";
 import Category from "./CategoryFilter/Category";
 import Pagination from "./Pagination/Pagination";
 import NumberOfCard from "./Pagination/NumberOfCard";
-import { connect } from "react-redux";
+
 import { movies$ } from "../db/movies";
 import { fetchMovies } from "../actions";
 
-const App = ({ movies, cardsPerPage, fetchMovies }) => {
+const App = ({ movies, moviesFiltered, cardsPerPage, fetchMovies }) => {
   // Fetch movies card
   useEffect(() => {
     fetchMovies(movies$);
@@ -15,9 +17,11 @@ const App = ({ movies, cardsPerPage, fetchMovies }) => {
 
   const [category, setCategory] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  // Get current cards
-  const indexOfLastCard = currentPage * cardsPerPage;
-  const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+
+  // Get current cards based on cardsPerPage and category
+  movies = moviesFiltered.length ? moviesFiltered : movies
+  const indexOfFirstCard = (currentPage - 1) * cardsPerPage;
+  const indexOfLastCard = (currentPage - 1) * cardsPerPage + cardsPerPage;
   const currentCards = movies.slice(indexOfFirstCard, indexOfLastCard);
 
   // Change page
@@ -29,19 +33,26 @@ const App = ({ movies, cardsPerPage, fetchMovies }) => {
 
       <div className="pagination">
         <Pagination
-          paginate={paginate}
           currentPage={currentPage}
+          paginate={paginate}
           numberOfPage={movies.length}
         />
       </div>
 
-      <div className="category">
-        <Category category={category} setCategory={setCategory} />
+      <div className="category" style={{ display: "flex", alignItems: "center", justifyContent: "space-between"}}>
+        <Category 
+          category={category} 
+          setCategory={setCategory} 
+        />
         <NumberOfCard />
       </div>
 
       <div className="MovieCard">
-        <MovieCard movies={currentCards} setCategory={setCategory} />
+        <MovieCard 
+          currentPage={currentPage} 
+          movies={currentCards} 
+          setCategory={setCategory} 
+        />
       </div>
     </div>
   );
@@ -51,6 +62,7 @@ const mapStateToProps = (state) => {
   return {
     movies: state.movies,
     cardsPerPage: state.cardsPerPage,
+    moviesFiltered: state.moviesFiltered,
   };
 };
 

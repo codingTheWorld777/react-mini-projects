@@ -1,13 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
+
 import { fetchCategories, filterMovies } from "../../actions";
 
 const Category = ({
-  movies,
   category,
   setCategory,
-  categories,
   filterMovies,
+  movies,
+  categories,
 }) => {
   const renderCategories = () => {
     const renderedCategories = categories.map((category, id) => {
@@ -22,7 +23,7 @@ const Category = ({
   };
 
   return (
-    <div>
+    <div className="mt-3 mb-5">
       <h3>Catégorie</h3>
 
       <div>
@@ -32,11 +33,11 @@ const Category = ({
           value={categories.includes(category) ? category : categories[0]}
           onChange={(e) => {
             setCategory(e.target.value);
-            const actions = async () => {
+            const filterMovies_ = async () => {
               await filterMovies(e.target.value, movies);
             };
 
-            actions();
+            filterMovies_();
           }}
         >
           {categories ? renderCategories() : null}
@@ -50,7 +51,6 @@ const mapStateToProps = (state) => {
   return {
     movies: state.movies,
     categories: state.categories,
-    moviesFiltered: state.moviesFiltered,
   };
 };
 

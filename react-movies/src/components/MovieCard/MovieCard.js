@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import { fetchMovies } from "../../actions";
+
 import DeleteBtn from "./DeleteBtn";
 
-const MovieCard = ({ movies, moviesFiltered, setCategory }) => {
+import { fetchMovies } from "../../actions";
+
+const MovieCard = ({ movies, setCategory }) => {
   // useEffect(() => {
   //   renderMovies(movies);
   //   renderMovies(moviesFiltered);
@@ -42,18 +44,15 @@ const MovieCard = ({ movies, moviesFiltered, setCategory }) => {
 
   return (
     <div className="row">
-      {moviesFiltered.length
-        ? renderMovies(moviesFiltered)
-        : renderMovies(movies)}
+      {renderMovies(movies)}
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    moviesFiltered: state.moviesFiltered,
-    cardsPerPage: state.cardsPerPage,
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     cardsPerPage: state.cardsPerPage,
+//   };
+// };
 
-export default connect(mapStateToProps, { fetchMovies })(MovieCard);
+export default connect(null, { fetchMovies })(MovieCard);

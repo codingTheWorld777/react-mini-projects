@@ -14,6 +14,11 @@ const moviesReducer = (movies = [], action) => {
 const moviesFilteredReducer = (movies = [], action) => {
   switch (action.type) {
     case "FILTER_MOVIES":
+      if (action.payload.category === "All") {
+        console.log(action.payload.listOfMovies.length)
+        return [...action.payload.listOfMovies]
+      }
+
       return action.payload.listOfMovies.filter(
         (movie) => movie.category === action.payload.category
       );
@@ -34,9 +39,9 @@ const categoriesReducer = (categories = [], action) => {
 const cardsPerPageReducer = (numberOfCard = 12, action) => {
   switch (action.type) {
     case "NUMBER_CARD":
-      return action.payload;
+      return parseInt(action.payload);
     default:
-      return numberOfCard;
+      return parseInt(numberOfCard);
   }
 };
 
