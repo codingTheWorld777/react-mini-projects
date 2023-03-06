@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 import { fetchCategories, filterMovies } from "../../actions";
@@ -10,6 +10,17 @@ const Category = ({
   movies,
   categories,
 }) => {
+  useEffect(() => {
+    const filterMovies_ = async () => {
+      await filterMovies(category, movies);
+    };
+    filterMovies_();
+  }, [category])
+
+  const handleChange = (e) => { 
+    setCategory(e.target.value);
+  }
+
   const renderCategories = () => {
     const renderedCategories = categories.map((category, id) => {
       return (
@@ -31,14 +42,7 @@ const Category = ({
           className="form-select"
           aria-label="Default select example"
           value={categories.includes(category) ? category : categories[0]}
-          onChange={(e) => {
-            setCategory(e.target.value);
-            const filterMovies_ = async () => {
-              await filterMovies(e.target.value, movies);
-            };
-
-            filterMovies_();
-          }}
+          onChange={handleChange}
         >
           {categories ? renderCategories() : null}
         </select>

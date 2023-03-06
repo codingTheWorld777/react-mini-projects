@@ -7,19 +7,20 @@ import Pagination from "./Pagination/Pagination";
 import NumberOfCard from "./Pagination/NumberOfCard";
 
 import { movies$ } from "../db/movies";
-import { fetchMovies } from "../actions";
+import { fetchMovies, filterMovies } from "../actions";
 
 const App = ({ movies, moviesFiltered, cardsPerPage, fetchMovies }) => {
+  const [category, setCategory] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+
   // Fetch movies card
   useEffect(() => {
     fetchMovies(movies$);
   }, []);
 
-  const [category, setCategory] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
-
   // Get current cards based on cardsPerPage and category
   movies = moviesFiltered.length ? moviesFiltered : movies
+
   const indexOfFirstCard = (currentPage - 1) * cardsPerPage;
   const indexOfLastCard = (currentPage - 1) * cardsPerPage + cardsPerPage;
   const currentCards = movies.slice(indexOfFirstCard, indexOfLastCard);
@@ -66,4 +67,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchMovies })(App);
+export default connect(mapStateToProps, { fetchMovies, filterMovies })(App);

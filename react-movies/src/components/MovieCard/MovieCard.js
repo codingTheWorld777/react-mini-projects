@@ -6,11 +6,6 @@ import DeleteBtn from "./DeleteBtn";
 import { fetchMovies } from "../../actions";
 
 const MovieCard = ({ movies, setCategory }) => {
-  // useEffect(() => {
-  //   renderMovies(movies);
-  //   renderMovies(moviesFiltered);
-  // }, [movies, moviesFiltered]);
-
   const renderMovies = (movies) => {
     const renderedMovies = movies.map((movie, id) => {
       return (
@@ -33,7 +28,11 @@ const MovieCard = ({ movies, setCategory }) => {
               </a>
             </div>
 
-            <DeleteBtn movie={movie} category={movie.category} setCategory={setCategory} />
+            <DeleteBtn 
+              movie={movie} 
+              category={movie.category} 
+              setCategory={setCategory} 
+            />
           </div>
         </div>
       );
@@ -48,11 +47,5 @@ const MovieCard = ({ movies, setCategory }) => {
     </div>
   );
 };
-
-// const mapStateToProps = (state) => {
-//   return {
-//     cardsPerPage: state.cardsPerPage,
-//   };
-// };
 
 export default connect(null, { fetchMovies })(MovieCard);

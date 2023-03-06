@@ -46,6 +46,8 @@ const Pagination = ({ movies, cardsPerPage, paginate, currentPage }) => {
           </li>
         </ul>
       </nav>
+      
+      <div className="lead">Current page: {currentPage}</div>
     </div>
   );
 };

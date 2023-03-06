@@ -14,14 +14,11 @@ const moviesReducer = (movies = [], action) => {
 const moviesFilteredReducer = (movies = [], action) => {
   switch (action.type) {
     case "FILTER_MOVIES":
-      if (action.payload.category === "All") {
-        console.log(action.payload.listOfMovies.length)
-        return [...action.payload.listOfMovies]
-      }
-
-      return action.payload.listOfMovies.filter(
+      const filteredMovies = action.payload.listOfMovies.filter(
         (movie) => movie.category === action.payload.category
-      );
+      )
+      if (action.payload.category === "ALL") console.log(action.payload.listOfMovies)
+      return action.payload.category !== 'ALL' ? filteredMovies : [...action.payload.listOfMovies];
     default:
       return movies;
   }
