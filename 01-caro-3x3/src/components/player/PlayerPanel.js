@@ -2,11 +2,7 @@ import React from "react";
 import "./PlayerPanel.css";
 import Player from "./Player";
 
-const PlayerPanel = ({ score, setNextRound }) => {
-    const restartGame = () => {
-        window.location.reload(false);
-    };  
-
+const PlayerPanel = ({ score, setNextRound, setGame }) => {
     return (
         <div className="player-panel">
             <div className="group-player">
@@ -16,7 +12,7 @@ const PlayerPanel = ({ score, setNextRound }) => {
 
             <div className="group-btn">
                 <button className="ui primary button" onClick={setNextRound}>Next</button>
-                <button className="ui green button" onClick={restartGame}>Restart</button>
+                <button className="ui green button" onClick={setGame}>Restart</button>
             </div>
         </div>
     );

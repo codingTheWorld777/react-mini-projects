@@ -19,27 +19,34 @@ const App = () => {
         }
     };
 
+    const restartGame = () => {
+        setNextRound();
+        setScore([0, 0]);
+    }
+
+    const fillBoardGame = (x, y, id) => {
+        let cloneBoardGame = [[null, null, null], [null, null, null], [null, null, null]];
+
+        for (let j = 0; j < boardGame.length; j++) {
+            for (let i = 0; i < boardGame[0].length; i++) {
+                cloneBoardGame[j][i] = boardGame[j][i];
+            }
+        }
+        if ((turn + 1) % 2 === 1) {
+            cloneBoardGame[y][x] = "X";
+            document.getElementById(`caro-element-${id}`).style.background = "url(" + process.env.PUBLIC_URL + "/images/x.png)";
+        } else {
+            cloneBoardGame[y][x] = "O";
+            document.getElementById(`caro-element-${id}`).style.background = "url(" + process.env.PUBLIC_URL + "/images/o.png)";
+        }
+
+        return cloneBoardGame;
+    }
+
     const updateBoardGame = (x, y, id) => {
         if (!boardGame[y][x] && !winner) {
-            setTurn(turn + 1);
-
-            let cloneBoardGame = [[null, null, null], [null, null, null], [null, null, null]];
-
-            for (let j = 0; j < boardGame.length; j++) {
-                for (let i = 0; i < boardGame[0].length; i++) {
-                    cloneBoardGame[j][i] = boardGame[j][i];
-                }
-            }
-            if ((turn + 1) % 2 === 1) {
-                cloneBoardGame[y][x] = "X";
-                document.getElementById(`caro-element-${id}`).style.background = "url(" + process.env.PUBLIC_URL + "/images/x.png)";
-            }
-            else {
-                cloneBoardGame[y][x] = "O";
-                document.getElementById(`caro-element-${id}`).style.background = "url(" + process.env.PUBLIC_URL + "/images/o.png)";
-            }
-
-            setBoardGame(cloneBoardGame);
+            setTurn(turn + 1);    
+            setBoardGame(fillBoardGame(x, y, id));
         }
     };
 
@@ -84,7 +91,11 @@ const App = () => {
                 </div>
 
                 <div style={{ marginTop: "40px", marginLeft: "20px" }}>
-                    <PlayerPanel score={score} setNextRound={setNextRound} />
+                    <PlayerPanel 
+                        score={score} 
+                        setNextRound={setNextRound}
+                        setGame={restartGame}
+                    />
                 </div>
             </div>
 
